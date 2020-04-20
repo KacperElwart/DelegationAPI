@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Panel użytkownika</a>
+      <a href="/delegation/add">Dodaj delegacje</a>
+      <a href="/logout">Wyloguj</a>
+    </nav>
+    <form action="#" th:action="save" method="POST">
+      <input type="datetime-local" th:field="*{delegation.dateStart}" placeholder="Czas rozpoczecia"/>
+      <input type="datetime-local" th:field="*{delegation.dateStop}" placeholder="Czas zakonczenia"/>
+      <input type="text" th:field="*{delegation.description}"  placeholder="Opis" />
+      <select name="Rodzaj transportu" th:field="*{delegation.tType}">
+        <option th:each="type : ${T(com.example.elwart.user.transport.Transport).values()}"
+                th:value="${type}" th:text="${type}"></option>
+      </select>
+      <input type="number"  step="0.01" min="0" th:field="*{delegation.ticketPrice}" placeholder="Koszt biletu" />
+      <input type="number"  step="0.01" min="0"  th:field="*{delegation.km}" placeholder="Konie mechaniczne" />
+      <input type="number"  min="900" max="1900" th:field="*{delegation.autoCapacity}" placeholder="Pojemnosc silnika" />
+      <input type="number"  step="0.01" min="0"  th:field="*{delegation.accommodationPrice}" placeholder="Cena zakwaterowania" />
+      <input type="number"  min="0"  th:field="*{delegation.breakfastNumber}" placeholder="Ilosc sniadan" />
+      <input type="number"  min="0"  th:field="*{delegation.dinnerNumber}" placeholder="Ilosc obiadow" />
+      <input type="number"  min="0" th:field="*{delegation.supperNumber}" placeholder="Ilosc kolacji" />
+      <input type="number" step="0.01" min="0"  th:field="*{delegation.travelDietAmount}" placeholder="Cena za jedzenie" />
+      <input type="number" step="0.01" min="0"  th:field="*{delegation.otherTicketsPrice}" placeholder="Cena za dodatkowe bilety" />
+      <input type="number" step="0.01" min="0"  th:field="*{delegation.otherOutlayPrice}" placeholder="Cena za dodatkowe " />
+      <button type="submit">Wyślij</button>
+    </form>
+  </body>
+</html>

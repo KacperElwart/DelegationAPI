@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body>
+  <nav>
+    <a href="/">Panel użytkownika</a>
+    <a href="/delegation/add">Dodaj delegacje</a>
+    <a href="/logout">Wyloguj</a>
+  </nav>
+    <div class="content">
+      <div class="data">
+        <h1>Dane</h1>
+        <p th:text=" ${user.getName()}"/>
+        <p th:text=" ${user.getFullName()}"/>
+        <p th:text="${user.getCompanyName()}" />
+        <p th:text="${user.getCompanyNip()}" />
+        <p th:text="${user.getCompanyAddress()}" />
+        <p class="adres"></p>
+        <button class="edit1">Edytuj</button>
+      </div>
+
+      <div class="list">
+        <table class="table table-hover ">
+          <thead>
+          <tr >
+            <th scope="col">#</th>
+            <th scope="col">Data startu</th>
+            <th scope="col">Data konca</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Rodzaj transportu</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="message , iter : ${user.getDelegations()}">
+            <th th:text = "${iter.index + 1}" ></th>
+            <th th:text="${message.getDateTimeStart()}"></th>
+            <th th:text="${message.getDateTimeStop()}"></th>
+            <th th:text="${message.getDescription()}"></th>
+            <th th:text="${message.getTransportType()}"></th>
+            <td>
+              <form action="#" th:action="@{/delegation/deleteDel}" method="POST">
+                    <input type="hidden" name="delegationId" th:value="${message.id}" />
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="if (!(confirm('Czy na pewno chcesz usunac delegacje?'))) return false">
+                      Usuń
+                    </button>
+
+                  </form>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

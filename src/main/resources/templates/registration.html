@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<nav>
+    <a href="/">Panel użytkownika</a>
+    <a href="/delegation/add">Dodaj delegacje</a>
+    <a href="/logout">Wyloguj</a>
+</nav>
+<form id="one" class="register-form" action="#" th:action="register" method="POST" >
+    <input type="text" th:field="*{user.email}" class="form-control"  placeholder="Email">
+    <p class="alert alert-danger" th:if="${#fields.hasErrors('user.email')}" th:errors="*{user.email}"> Email zajęty</p>
+
+    <input type="text" th:field="*{user.password}" class="form-control"  placeholder="Haslo (minimum 8 znakow)">
+    <p class="alert alert-danger" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"> Hasło jest za krótkie</p>
+    <input type="text" th:field="*{user.name}" class="form-control"  placeholder="Imie">
+    <p class="alert alert-danger" th:if="${#fields.hasErrors('user.name')}" th:errors="*{user.password}"> Imie jest obowiazkowe</p>
+
+    <input type="text" th:field="*{user.fullName}" class="form-control"  placeholder="Nazwisko">
+    <p class="alert alert-danger" th:if="${#fields.hasErrors('user.name')}" th:errors="*{user.password}"> Nazwisko jest obowiazkowe</p>
+
+    <input type="text" th:field="*{user.companyName}" class="form-control"  placeholder="Nazwa firmy">
+    <input type="text" th:field="*{user.companyNip}" class="form-control"  placeholder="Nip firmy">
+    <input type="text" th:field="*{user.companyAddress}" class="form-control"  placeholder="Adres firmy">
+    <button type="submit" class="btn btn-info btn-sm">Rejestracja</button>
+
+</form>
+</body>
+</html>
